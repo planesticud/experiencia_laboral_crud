@@ -149,7 +149,11 @@ func (c *CargoController) Put() {
 		} else {
 			alertdb := structs.Map(err)
 			var code string
-			formatdata.FillStruct(alertdb["Code"], &code)
+			err:= formatdata.FillStruct(alertdb["Code"], &code)
+			if err == nil{
+				alert := models.Alert{Type: "error", Code: "E_000", Body: err.Error()}
+			c.Data["json"] = alert
+			}
 			alert := models.Alert{Type: "error", Code: "E_" + code, Body: err.Error()}
 			c.Data["json"] = alert
 		}

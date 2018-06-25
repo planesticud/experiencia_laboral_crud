@@ -1,0 +1,6 @@
+projectKey=scaner:experiencia_laboral_crud:25062018
+serverUrl=http://localhost:9000
+serverVersion=7.0.0.36138
+dashboardUrl=http://localhost:9000/dashboard/index/scaner:experiencia_laboral_crud:25062018
+ceTaskId=AWQ4n0YsnKD-lxhlPYmy
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AWQ4n0YsnKD-lxhlPYmy

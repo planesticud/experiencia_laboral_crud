@@ -12,7 +12,10 @@ import (
 )
 
 func init() {
-	orm.RegisterDataBase("default", "postgres", "postgres://"+beego.AppConfig.String("PGuser")+":"+beego.AppConfig.String("PGpass")+"@"+beego.AppConfig.String("PGurls")+"/"+beego.AppConfig.String("PGdb")+"?sslmode=disable&search_path="+beego.AppConfig.String("PGschemas")+"")
+	err := orm.RegisterDataBase("default", "postgres", "postgres://"+beego.AppConfig.String("PGuser")+":"+beego.AppConfig.String("PGpass")+"@"+beego.AppConfig.String("PGurls")+"/"+beego.AppConfig.String("PGdb")+"?sslmode=disable&search_path="+beego.AppConfig.String("PGschemas")+"")
+	if err != nil {
+
+	}
 }
 
 func main() {
@@ -38,9 +41,15 @@ func main() {
 	logPath := "{\"filename\":\""
 	logPath += beego.AppConfig.String("logPath")
 	logPath += "\"}"
-	logs.SetLogger(logs.AdapterFile, logPath)
+	err := logs.SetLogger(logs.AdapterFile, logPath)
+	if err != nil {
+		apistatus.Init()
 
-	apistatus.Init()
+		beego.Run()
+	} else {
 
-	beego.Run()
+		apistatus.Init()
+
+		beego.Run()
+	}
 }
